@@ -1,28 +1,38 @@
 const express = require("express")
-const cors= require("cors")
-const app = express()
+const cors=require("cors")
 const mongoose= require("mongoose")
+const app= express()
 const user = require("./models/user")
 
+mongoose.connect("mongodb://localhost:27017/biba")
+
+//mi
 
 app.use(express.json())
 app.use(cors())
 
 
+app.post("/signup",async(req,resp)=>{
+    const data=new user(req.body)
+    const result = await data.save()
 
 
-app.post("/signup", async(req,resp)=>{
+
+
+
+
+
     
+    console.log(result)
+    resp.send("kaam ho gya")
 
-    const data= new user(req.body)
-    const result= await data.save()
-    resp.send("registerd")
+    
 })
 
-
-
-
-
-
-
 app.listen(5000)
+
+
+
+
+
+
